@@ -1,0 +1,643 @@
+double comparedToEarth() {
+    double earth = 12765.3;
+    double relativeSize = diameter / earth;
+    return relativeSize;
+  }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+ static String closerToSun(CelestialBody b1, CelestialBody b2) {
+    if (b1.distance < b2.distance) {
+      return b1.name;
+    } else {
+      return b2.name;
+    }
+  }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//add class definitions below this line
+
+class Mass {
+  double milligrams;
+  double grams;
+  double kilograms;
+  
+  Mass(int mg, int g, int kg) {
+    milligrams = mg;
+    grams = g;
+    kilograms = kg;
+  }
+  
+  double totalWeight() {
+    double tw = kilograms * 1000 + grams + milligrams / 1000;
+    return tw;
+  }
+  
+  static double combinedWeight(Mass m1, Mass m2) {
+    return m1.totalWeight() + m2.totalWeight();
+  }
+  
+  static String heavier(Mass m1, Mass m2) {
+    double mass1 = m1.totalWeight();
+    double mass2 = m2.totalWeight();
+    if (mass1 > mass2) {
+      return "The first object is heavier";
+    } else if (mass2 > mass1) {
+      return "The second object is heavier";
+    } else {
+      return "The two objects weigh the same";
+    }
+  }
+  
+  static double averageWeight(Mass m1, Mass m2) {
+    return combinedWeight(m1, m2) / 2;
+  }
+}
+ 
+//add class definitions above this line
+//////////////////////////////////////////////////////////////////////////////
+import java.util.ArrayList;
+
+//add class definitions below this line
+
+class Library {
+  ArrayList<String> available;
+  ArrayList<String> onLoan;
+  
+  Library() {
+    available = new ArrayList<String>();
+    onLoan = new ArrayList<String>();
+  }
+  
+  void addBooks(String[] books) {
+    for (String book : books) {
+      available.add(book);
+    }
+  }
+  
+  void borrowBook(String book) {
+    onLoan.add(book);
+    available.remove(book);
+  }
+  
+  void returnBook(String book) {
+    onLoan.remove(book);
+    available.add(book);
+  }
+}
+ 
+//add class definitions above this line
+
+public class Exercise4 {  
+  public static void main(String[] args) {
+    
+    //add code below this line
+    
+    Library myLibrary = new Library();
+    String[] books = {"Four Seasons", "Say Nothing", "Milkman", "Harry Potter and the Order of the Phoenix"};
+    myLibrary.addBooks(books);
+    myLibrary.borrowBook("Harry Potter and the Order of the Phoenix");
+    myLibrary.borrowBook("Say Nothing");
+    myLibrary.returnBook("Say Nothing");
+    System.out.println(myLibrary.available);
+    System.out.println(myLibrary.onLoan);  
+
+    //add code above this line
+  }
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import java.util.ArrayList;
+
+//add class definitions below this line
+class Subway {
+  static double fare = 2.4;
+  String[] stops;
+  String currentStop;
+  String direction;
+  int passengers;
+  double totalFares;
+  
+  Subway() {
+    stops = new String[]{"Alewife", "Davis", "Porter", "Harvard", "Central", "Kendall"};
+    currentStop = "Alewife";
+    direction = "south";
+    passengers = 0;
+    totalFares = 0;
+  }
+  void board(int p) {
+    passengers += p;
+    calculateFares(p);
+  }
+    void calculateFares(int p) {
+    totalFares += p * fare;
+  }
+   void disembark(int p) {
+    if (passengers - p < 0) {
+      passengers = 0;
+    } else {
+      passengers -= p;
+    }
+  }
+   static void changeFare(double newFare) {
+    fare = newFare;
+  }
+  int getIndex(String element) {
+    for (int i = 0; i < stops.length; i++) {
+      if (element.equals(stops[i])) {
+        return i;
+      }
+    }
+    return -1;
+  }
+    int distance(String destination) {
+    int currentIndex = getIndex(currentStop);
+    int destinationIndex = getIndex(destination);
+    return Math.abs(destinationIndex - currentIndex);
+  }
+  void advance() {
+    if (direction.equals("south")) {
+      if (currentStop.equals("Kendall")) {
+        currentStop = "Central";
+        direction = "north";
+      } else {
+        int currentIndex = getIndex(currentStop);
+        currentStop = stops[currentIndex + 1];
+      }
+    } else if (direction.equals("north")) {
+      if (currentStop.equals("Alewife")) {
+        currentStop = "Davis";
+        direction = "south";
+      } else {
+        int currentIndex = getIndex(currentStop);
+        currentStop = stops[currentIndex - 1];
+      }
+    }
+  }
+}
+
+ 
+//add class definitions above this line
+
+public class Exercise5 {  
+  public static void main(String[] args) {
+    
+    //add code below this line
+    
+
+
+    //add code above this line
+  }
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+class Fruit {
+  private String name;
+  private String color;
+  
+  public Fruit(String n, String c) {
+    name = n;
+    color = c;
+  }
+  
+  public String getName() {
+    return name;
+  }
+  
+  public void setName(String newName) {
+    name = newName;
+  }
+  
+  public String getColor() {
+    return color;
+  }
+  
+  public void setColor(String newColor) {
+    color = newColor;
+  }
+}
+  
+//add class definitions above this line
+
+public class CodingExercise1 {
+  public static void main(String[] args) {
+    
+    //add code below this line
+
+    Fruit myFruit = new Fruit("strawberry", "red");
+    
+    System.out.println(myFruit.getName());
+    System.out.println(myFruit.getColor());
+    
+    myFruit.setName("tangerine");
+    myFruit.setColor("orange");
+    System.out.println(myFruit.getName());
+    System.out.println(myFruit.getColor());
+
+    //add code above this line
+  }
+}
+////////////////////////////////////////////////////////////////////////////////
+//add class definitions below this line
+    
+class Watch {
+  private String manufacturer;
+  private String model;
+  private int diameter;
+  private int waterResistance;
+  private String material;
+  
+  public Watch (String ma, String mo, int d, int wr, String mat) {
+    manufacturer = ma;
+    model = mo;
+    diameter = d;
+    waterResistance = wr;
+    material = mat;
+  }
+  
+  public String getManufacturer() {
+    return manufacturer;
+  }
+  
+  public void setManufacturer(String newManufacturer) {
+    manufacturer = newManufacturer;
+  }
+  
+  public String getModel() {
+    return model;
+  }
+  
+  public void setModel(String newModel) {
+    model = newModel;
+  }
+  
+  public int getDiameter() {
+    return diameter;
+  }
+  
+  public void setDiameter(int newDiameter) {
+    diameter = newDiameter;
+  }
+  
+  public int getWaterResistance() {
+    return waterResistance;
+  }
+  
+  public void setWaterResistance(int newWaterResistance) {
+    waterResistance = newWaterResistance;
+  }
+  
+  public String getMaterial() {
+    return material;
+  }
+  
+  public void setMaterial(String newMaterial) {
+    material = newMaterial;
+  }
+  
+  public String summary() {
+    String summary = "";
+    summary += "Manufacturer: " + capitalize(manufacturer) + "\n";
+    summary += "Model: " + capitalize(model) + "\n";
+    summary += "Diameter: " + diameter + " mm\n";
+    summary += "Water Resistance: " + waterResistance + " m\n";
+    summary += "Material: " + capitalize(material);
+    return summary;
+  }
+  
+  private String capitalize(String s) {
+    String capitalizedString = "";
+    capitalizedString += s.substring(0, 1).toUpperCase();
+    capitalizedString += s.substring(1);
+    return capitalizedString;
+  }
+}
+  
+//add class definitions above this line
+
+public class CodingExercise2 {
+  public static void main(String[] args) {
+    
+    //add code below this line
+
+    Watch myWatch = new Watch("omega", "speedmaster", 42, 50, "steel");
+    System.out.println(myWatch.summary());
+
+    //add code above this line
+  }
+}
+//////////////////////////////////////////////////////////////////////////
+//add class definitions below this line
+    
+class Song {
+  private String artist;
+  private String title;
+  private String album;
+  private int playCount;
+  private final double payRate;
+  private double moneyEarned;
+  
+  public Song(String ar, String t, String al, double p) {
+    artist = ar;
+    title = t;
+    album = al;
+    playCount = 0;
+    payRate = p;
+    moneyEarned = 0;
+  }
+  
+  public String getArtist() {
+    return artist;
+  }
+  
+  public void setArtist(String newArtist) {
+    artist = newArtist;
+  }
+  
+  public String getTitle() {
+    return title;
+  }
+  
+  public void setTitle(String newTitle) {
+    title = newTitle;
+  }
+  
+  public String getAlbum() {
+    return album;
+  }
+  
+  public void setAlbum(String newAlbum) {
+    album = newAlbum;
+  }
+  
+  public int getPlayCount() {
+    return playCount;
+  }
+  
+  public void setPlayCount(int newPlayCount) {
+    playCount = newPlayCount;
+  }
+  
+  public double getMoneyEarned() {
+    return moneyEarned;
+  }
+  
+  public double getPayRate() {
+    return payRate;
+  }
+  
+  public void play() {
+    updatePlayCount();
+    updateMoneyEarned();
+  }
+  
+  private void updatePlayCount() {
+    playCount++;
+  }
+  
+  private void updateMoneyEarned() {
+    moneyEarned = playCount * payRate;
+  }
+  
+}
+  
+//add class definitions above this line
+
+public class CodingExercise3 {
+  public static void main(String[] args) {
+    
+    //add code below this line
+
+    Song mySong = new Song("led zeppelin", "ten years gone", "physical graffiti", 0.001);
+    mySong.play();
+    System.out.println(mySong.getMoneyEarned());
+    for (int i = 0; i < 10000; i++) {
+      mySong.play();
+    }
+    System.out.println(mySong.getMoneyEarned());
+
+    //add code above this line
+  }
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//add class definitions below this line
+    
+class Atm {
+  private double money;
+  
+  public Atm(double m) {
+    money = m;
+  }
+  
+  public double getMoney() {
+    return money;
+  }
+  
+  public void withdraw(double amount) {
+    if (haveEnoughMoney(amount)) {
+      if (positiveMoney(amount)) {
+         money -= amount;
+      } else {
+        System.out.println("You cannot withdraw a negative amount of money.");
+      }
+    } else {
+      System.out.println("You do not have enough funds to withdraw that amount.");
+    }
+  }
+  
+  public void deposit(double amount) {
+    if (positiveMoney(amount)) {
+      money += amount;
+    } else {
+      System.out.println("You cannot deposit a negative amount of money.");
+    }
+  }
+  
+  private boolean haveEnoughMoney(double amount) {
+    return money > amount;
+  }
+  
+  private boolean positiveMoney(double amount) {
+    return amount >= 0;
+  }
+}
+  
+//add class definitions above this line
+
+public class CodingExercise4 {
+  public static void main(String[] args) {
+    
+    //add code below this line
+
+    Atm myAtm = new Atm(1000);
+    myAtm.deposit(50);
+    System.out.println(myAtm.getMoney());
+    myAtm.withdraw(925);
+    System.out.println(myAtm.getMoney());    
+
+    //add code above this line
+  }
+}
+////////////////////////////////////////////////////////////////////////////////
+//add class definitions below this line
+    
+class SodaMachine {
+  private String[] sodas = {"coke", "pepsi", "sprite", "dr. pepper"};
+  private int cokeInventory;
+  private int pepsiInventory;
+  private int spriteInventory;
+  private int drPepperInventory;
+  private int money;
+    
+  public SodaMachine() {
+    cokeInventory = 20;
+    pepsiInventory = 20;
+    spriteInventory = 20;
+    drPepperInventory = 20;
+    money = 10;
+  }
+  
+  public String[] getSodas() {
+    return sodas;
+  }
+  
+  public void setSodas(int index, String newSoda) {
+    sodas[index] = newSoda;
+  }
+  
+  public int getCokeInventory() {
+    return cokeInventory;
+  }
+  
+  public void setCokeInventory(int newInventory){
+    cokeInventory = newInventory;
+  }
+  
+  public int getPepsiInventory() {
+    return pepsiInventory;
+  }
+  
+  public void setPepsiInventory(int newInventory){
+    pepsiInventory = newInventory;
+  }
+  
+  public int getSpriteInventory() {
+    return spriteInventory;
+  }
+  
+  public void setSpriteInventory(int newInventory){
+    spriteInventory = newInventory;
+  }
+  
+  public int getDrPepperInventory() {
+    return drPepperInventory;
+  }
+  
+  public void setDrPepperInventory(int newInventory){
+    drPepperInventory = newInventory;
+  }
+  
+  public int getMoney() {
+    return money;
+  }
+  
+  public void setMoney(int newMoney){
+    money = newMoney;
+  }
+  
+  public void buySoda(String soda, int amount) {
+    if (validSoda(soda) && enoughSoda(soda) && enoughMoney(amount)) {
+      updateInventory(soda);
+      updateMoney();
+    }
+  }
+  
+  private boolean validSoda(String soda) {
+    boolean correctSoda = false;
+    
+    for (String s : sodas) {
+      if (soda.equals(s)) {
+        correctSoda = true;
+      }
+    }
+    
+    if (correctSoda == false) {
+      System.out.println("That soda is not sold in this machine.");
+    }
+    return correctSoda;
+  }
+  
+  private boolean enoughMoney(int amount) {
+    if (amount >= 2) {
+      return true;
+    } else {
+      System.out.println("You did not insert enough money.");
+      return false;
+    }
+  }
+  
+  private boolean enoughSoda(String soda) {
+    if (soda.equals("coke")) {
+      if (cokeInventory > 0) {
+        return true;
+      } else {
+        System.out.println("There are no cans of Coke.");
+        return false;
+      }
+    } else if (soda.equals("sprite")) {
+      if (spriteInventory > 0) {
+        return true;
+      } else {
+        System.out.println("There are no cans of Sprite.");
+        return false;
+      }
+    } else if (soda.equals("pepsi")) {
+      if (pepsiInventory > 0) {
+        return true;
+      } else {
+        System.out.println("There are no cans of Pepsi.");
+        return false;
+      }
+    } else if (soda.equals("dr. pepper")) {
+      if (drPepperInventory > 0) {
+        return true;
+      } else {
+        System.out.println("There are no cans of Dr. Pepper.");
+        return false;
+      }
+    }
+    return false;
+  }
+  
+  private void updateInventory(String soda) {
+    if (soda.equals("coke")) {
+      cokeInventory--;
+    } else if (soda.equals("sprite")) {
+      spriteInventory--;
+    } else if (soda.equals("pepsi")) {
+      pepsiInventory--;
+    } else if (soda.equals("dr. pepper")) {
+      drPepperInventory--;
+    }
+  }
+  
+  private void updateMoney() {
+    money += 2;
+  }
+}
+  
+//add class definitions above this line
+
+public class CodingExercise5 {
+  public static void main(String[] args) {
+    
+    //add code below this line
+
+    SodaMachine myMachine = new SodaMachine();
+    myMachine.buySoda("coke", 4);
+    System.out.println(myMachine.getMoney());
+    System.out.println(myMachine.getCokeInventory());
+
+    //add code above this line
+  }
+}
+///////////////////////////////////////////////////////////////////////
